@@ -8,26 +8,26 @@ print(sum(nums))
 
 # Part 2
 with open('input.txt', 'r') as f:
-    nums = re.findall(r"(?:mul\((\d+),(\d+)\))|(do\(\))|(don't\(\))", f.read().strip())
+    matches = re.findall(
+        r"(?:mul\((\d+),(\d+)\))|(do\(\))|(don't\(\))",
+        f.read().strip()
+        )
 
-nums_fix = []
-
-for num in nums:
-    if num[2]:
-        nums_fix.append(str(num[2]))
-    elif num[3]:
-        nums_fix.append(str(num[3]))
-    else:
-        nums_fix.append(int(num[0]) * int(num[1]))
+items = [
+    int(m[0]) * int(m[1]) if m[0] and m[1] else m[2] or m[3]
+    for m in matches
+]
 
 ans = []
 do_mul = True
-for item in range(len(nums_fix)):
-    if nums_fix[item] == "don't()":
+
+for item in items:
+    if item == "don't()":
         do_mul = False
-    elif nums_fix[item] == 'do()':
+    elif item == 'do()':
         do_mul = True
     else:
         if do_mul:
-            ans.append(nums_fix[item])
+            ans.append(item)
+
 print(sum(ans))
