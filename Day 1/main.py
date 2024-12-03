@@ -17,4 +17,11 @@ for index in range(len(pairs)):
     apart = abs(left_side[index] - right_side[index])
     difference.append(apart)
 
+# Part 1 answer
 print(sum(difference))
+
+# Part 2 answer
+similarity = []
+for number in left_side:
+    similarity.append(number * right_side.count(number))
+print(sum(similarity))
