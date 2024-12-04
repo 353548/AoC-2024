@@ -1,6 +1,13 @@
 with open('input.txt', 'r') as f:
     text = [i.strip() for i in f.readlines()]
 
+"""
+NOTE TO SELF:
+If you use negative values as list indexes Python will
+access them anyway. This really made it hard to find
+what is wrong with today's code.
+"""
+
 def search(file):
     rows = len(file)
     columns = len(file[0])
